@@ -1,0 +1,44 @@
+<%= form_with(model: cat, local: true) do |form| %>
+  <% if cat.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cat.errors.count, "error") %> prohibited this cat from being saved:</h2>
+
+      <ul>
+      <% cat.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>
+
+  <%= form_tag(cats_path) do %>
+    <div class = "form-group">
+      <%= label_tag 'name', 'Name of Cat'%>
+      <%= text_field_tag 'name'%>
+      <br>
+      
+      <%= label_tag 'sex_f', "Female" %>
+      <%= radio_button_tag 'sex', "f" %>
+      <%= label_tag 'sex_m', "Male" %>
+      <%= radio_button_tag 'sex', 'm '%>
+
+      <br>
+    </div>
+
+    <div class = "form-group">
+      <p> Select the color of cat </p>
+      <%= select_tag("color", options_for_select(["blue", "white", "orange", "yellow", "green"])) %>
+    </div>
+    <br>
+
+    <div class = "form-group">
+      <%# <%= label_tag 'description', 'Cat Bio:'%> 
+      <p> cat description <p>
+      <%= text_area_tag 'description' %>
+    </div>
+    <br>
+
+    <%= submit_tag "make the cat" %>
+  <% end %>
+

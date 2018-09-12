@@ -5,9 +5,7 @@ ruby '2.5.1'
 
 group :development do
   gem 'better_errors'
-  gem 'binder_of_caller'
   gem 'pry-rails'
-
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -29,6 +27,8 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+# gem 'execjs', '~> 2.7'
+# gem 'sprockets', '~> 4.0'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
