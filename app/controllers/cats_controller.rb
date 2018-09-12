@@ -10,11 +10,13 @@ class CatsController < ApplicationController
   # GET /cats/1
   # GET /cats/1.json
   def show
+    set_cat
   end
 
   # GET /cats/new
   def new
     @cat = Cat.new
+    redirect_to cat_url(@cat)
   end
 
   # GET /cats/1/edit
@@ -25,29 +27,24 @@ class CatsController < ApplicationController
   # POST /cats.json
   def create
     @cat = Cat.new(cat_params)
-    
-    respond_to do |format|
-      if @cat.save
-        format.html { redirect_to @cat, notice: 'Cat was successfully created.' }
-        format.json { render :show, status: :created, location: @cat }
-      else
-        format.html { render :new }
-        format.json { render json: @cat.errors, status: :unprocessable_entity }
-      end
+    if @cat.save
+      redirect_to cat_url(@cat)
+      flash.now[:notice] = "Great Job creating #{@cat.name}!!"
+    else
+      flash.now[:errors] = @cat.errors.full_messages
+      render :new
     end
   end
 
   # PATCH/PUT /cats/1
   # PATCH/PUT /cats/1.json
   def update
-    respond_to do |format|
-      if @cat.update(cat_params)
-        format.html { redirect_to @cat, notice: 'Cat was successfully updated.' }
-        format.json { render :show, status: :ok, location: @cat }
-      else
-        format.html { render :edit }
-        format.json { render json: @cat.errors, status: :unprocessable_entity }
-      end
+    @cat = Cat.find(params[:id])
+    if @cat.update_attributes(cat_params)
+      redirect_to cat_url(@cat)
+    else
+      flash.now[:errors] = @cat.errors.full_messages
+      render :edit
     end
   end
 
